@@ -13,13 +13,13 @@ export function Footer() {
           <Link href="/" className="nav-link px-2 text-body-primary">Início</Link>
         </li>
         <li className="nav-item">
-          <Link href="/create" className="nav-link px-2 text-body-primary">Nova Campanha</Link>
+          <Link href="/" className="nav-link px-2 text-body-primary">Nova Campanha</Link>
         </li>
         <li className="nav-item">
-          <Link href="/donate" className="nav-link px-2 text-body-primary">Doar</Link>
+          <Link href="/" className="nav-link px-2 text-body-primary">Doar</Link>
         </li>
         <li className="nav-item">
-          <Link href="/about" className="nav-link px-2 text-body-primary">Sobre</Link>
+          <Link href="/" className="nav-link px-2 text-body-primary">Sobre</Link>
         </li>
       </ul>
     </footer>
