@@ -7,18 +7,15 @@ import { getCampaign, donate } from "@component/services/Web3Service";
 export default function Donate() {  
   const [campaign, setCampaign] = useState({} as any);
   const [donation, setDonation] = useState(0)
+  const [campaignId, setCampaignId] = useState("")
   const [message, setMessage] = useState("")
-
-  function onChangeId(event: React.FormEvent<HTMLInputElement>) {
-    campaign.id = event.currentTarget.value
-  }
 
   function handleSearch(event: React.FormEvent<HTMLInputElement>) {
     setMessage("Buscando. Por favor aguarde...")
-    getCampaign(campaign.id)
+    getCampaign(campaignId)
       .then((result: any) => {
         setMessage("")
-        result.id = campaign.id
+        result.id = campaignId
         setCampaign(result)
       })
       .catch((err: Error) => setMessage(err.message))
@@ -43,15 +40,21 @@ export default function Donate() {
       <div className="container">
         <h1 className="display-5 fw-bold text-body-emphasis lh-1 mb-3">Donate Crypto</h1>
         {
-          campaign.id ?
+          !campaign.id ?
             <>
               <p className="mb-5">
                 Qual é o ID da campanha que procura?
               </p>
               <div className="col-3">
                 <div className="input-group mb-3">
-                  <input type="number" name="campaignId" id="campaignId" className="form-control" onChange={onChangeId} value={campaign.id} />
-                  <input type="button" value="Buscar" className="btn btn-primary p-3" onClick={handleSearch} />
+                  <input type="number" name="campaignId" id="campaignId" className="form-control" min="0" onChange={(e) => setCampaignId(e.target.value)} value={campaignId} />
+                  <input 
+                    type="button" 
+                    value="Buscar" 
+                    className="btn btn-primary p-3" 
+                    onClick={handleSearch} 
+                    disabled={!campaignId}
+                  />
                 </div>
               </div>
             </>

@@ -61,7 +61,7 @@ export default function Create() {
   function handleFormSubmit(event: React.FormEvent<HTMLInputElement>) {
     setMessage("Salvando. Por favor aguarde...")
     addCampaign(campaign)
-      .then(tx => getLastCampaignId())
+      .then(transaction => getLastCampaignId())
       .then(id => { 
         setMessage(`Campanha salva com ID ${id}. Avise seus amigos e passe esse número.`)
         dispatch({ type: CLEAR })
@@ -70,7 +70,6 @@ export default function Create() {
         console.error(err)
         setMessage(err.message)
       })
-    // setMessage(JSON.stringify(campaign))
   }
 
   return (
@@ -101,7 +100,13 @@ export default function Create() {
           </div>
         </div>
         <div className="col-6 mb-3">
-          <input type="button" className="btn btn-primary col-12 p-3" value="Salvar Campanha" onClick={handleFormSubmit} />
+          <input 
+            type="button" 
+            className="btn btn-primary col-12 p-3" 
+            value="Salvar Campanha" 
+            onClick={handleFormSubmit} 
+            disabled={!(!!(campaign.title && campaign.description))}
+          />
         </div>
         <div className="col-6 mb-3">
           <Link href="/" className="btn btn-secondary col-12 p-3" aria-label="button" role="button">Voltar</Link>

@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
+import Link from 'next/link'
 
 import { doLogin } from '../services/Web3Service'
 
 import metamaskIcon from '../../public/metamask.svg'
-import Link from 'next/link'
 
 export default function Home() {
   const [wallet, setWallet] = useState("")
