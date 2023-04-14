@@ -11,14 +11,14 @@ export async function doLogin() {
   
   if(!accounts || !accounts.length) throw new Error("Wallet not found/allowed.")
 
-  localStorage.setItem("eth-donate-app:wallet", accounts[0])
+  localStorage.setItem("@eth-donate-app:wallet", accounts[0])
 
   return accounts[0]
 }
 
 function getContract() {
   const web3 = new Web3(window.ethereum)
-  const from = localStorage.getItem("eth-donate-app:wallet")
+  const from = localStorage.getItem("@eth-donate-app:wallet")
   return new web3.eth.Contract(ABI, CONTRACT_ADDRESS, { from })
 }
 
@@ -31,4 +31,14 @@ export async function addCampaign(campaign) {
 export function getLastCampaignId() {
   const contract = getContract()
   return contract.methods.nextId().call()
+}
+
+export function getCampaign(id) {
+  const contract = getContract()
+  return contract.methods.campaigns(id).call()
+}
+
+export function donate(id, donationValue) {
+  const contract = getContract()
+  return contract.methods.donate(id).send({ value: Web3.utils.toWei(donationValue, "ether") })
 }

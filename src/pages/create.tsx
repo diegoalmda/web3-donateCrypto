@@ -70,6 +70,7 @@ export default function Create() {
         console.error(err)
         setMessage(err.message)
       })
+    // setMessage(JSON.stringify(campaign))
   }
 
   return (
